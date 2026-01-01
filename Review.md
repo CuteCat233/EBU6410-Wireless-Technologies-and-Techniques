@@ -28,9 +28,12 @@
     - X：电抗部分，储存能量
   - 阻抗匹配 (Impedance matched)：天线阻抗应与传输线阻抗匹配（通常为$50\Omega$），以实现最大功率传输
 - 反射系数 (Reflection coefficient)：反映阻抗失配产生的能量反射
-  - 公式：$$\Gamma=\frac{Z_L-Z_0}{Z_L+Z_0}$$
+  - 公式：
+  
+  $$\Gamma=\frac{Z_L-Z_0}{Z_L+Z_0}$$
 - 回波损耗 (Return loss)：反射系数的对数形式（通常要求其大于10dB）
-  - 公式：$$RL=-20\log_{10}(\left|\Gamma\right|)$$
+  - 公式：
+  $$RL=-20\log_{10}(\left|\Gamma\right|)$$
   - 反射的功率：$$P_{r}=10^{-\frac{RL}{10}}$$
 ### 1.2 天线类型与设计
 - 天线类型：鞭状/单极子、偶极子、八木、环、喇叭、反射阵列、微带贴片、反射面（碟形）、MIMO、相控阵等
