@@ -89,7 +89,7 @@ $$P_{r}=10^{-\frac{\text{RL}}{10}}$$
      - 谐振频率 (Resonant Frequency): $f_r$
      - 介质介电常数 (Dielectric Constant of the Substrate): $\varepsilon_r$
      - 基板高度 (Height of the Substrate): $h$
-2. 贴片宽度$W$：
+2. 贴片宽度 $W$：
    
 $$W=\frac{c}{2f_r}\sqrt{\frac{2}{\varepsilon_r+1}}$$
 
@@ -97,15 +97,15 @@ $$W=\frac{c}{2f_r}\sqrt{\frac{2}{\varepsilon_r+1}}$$
 
 $$\varepsilon_{reff}=\frac{\varepsilon_r+1}2+\frac{\varepsilon_r-1}2\sqrt{1+12\frac{h}{W}}$$
 
-4. 长度延伸量$\Delta L$：
+4. 长度延伸量 $\Delta L$：
 
 $$\Delta L=0.412h\frac{\left(\varepsilon_{reff}+0.3\right)\left(\dfrac{W}{h}+0.264\right)}{\left(\varepsilon_{reff}-0.258\right)\left(\dfrac{W}{h}+0.8\right)}$$
 
-5. 实际长度$L$：
+5. 实际长度 $L$：
 
 $$L=\frac{c}{2f_r\sqrt{\varepsilon_{reff}}}-2\Delta L$$
   
-6. 根据$Z_0=50\Omega$计算馈带宽度$W_f$（$t$是贴片厚度）：
+6. 根据 $Z_0=50\Omega$ 计算馈带宽度 $W_f$ ($t$是贴片厚度)：
    
 $$W_f=\frac{7.48\times h}{e^{Z_0\frac{\sqrt{\varepsilon_r+1.41}}{87}}}-1.25\times t$$
 
