@@ -53,8 +53,7 @@ $e_{\text{tot}}$ 为总效率
 
 $$Z=R+jX$$
 
-R：电阻部分，消耗或辐射能量
-X：电抗部分，储存能量
+$R$：电阻部分，消耗或辐射能量; $X$：电抗部分，储存能量
 - 阻抗匹配 (Impedance matched)：天线阻抗应与传输线阻抗匹配（通常为$50\Omega$），以实现最大功率传输
 
 反射系数 (Reflection coefficient, $\Gamma$)：反映阻抗失配产生的能量反射 (The ratio of reflected voltage to incident voltage, measuring the reflection or energy loss)
@@ -147,6 +146,7 @@ $$P_r(\text{dB})=P_t(\text{dB})+G_r(\text{dB})+G_t(\text{dB})-20\log_{10}\left(\
 - 反射面天线 (Reflector)、喇叭天线 (Horn)、相控阵天线 (Phased array)、反射阵列天线 (Reflectarray)、贴片天线 (Patch) 等
 ### 1.5 5G
 第五代通信技术 (5G)：The fifth generation of wireless cellular technology and is the new global wireless standard after 4G/LTE.
+
 关键技术：
 - 增强移动宽带 (Enhance Mobile Broadband, eMBB)：Provides significantly faster data speeds and larger data volumes for mobile communications
 - 大规模机器通信 (Massive Machine Type Communication, mMTC)：Supports the connectivity of a vast number of devices, particularly in massive IoT applications
@@ -205,7 +205,7 @@ MIMO信道模型：
 阵列天线 (Array Antenna)：将特定模式排列的多个单独天线元件作为单个天线系统协同工作的配置 (A configuration of multiple individual antenna elements arranged in a specific pattern to work together as a single antenna system)
 
 相控阵天线 (Phased Array Antenna)：由多个天线单元组成，通过电子控制相位实现波束扫描 (A type of array antenna in which the phase of the signal at each individual antenna element is controlled electronically)
-- 阵列增益公式（$N$为单元数，$G_e$为单元增益，$L$为损耗）：
+- 阵列增益公式 ($N$为单元数, $G_e$为单元增益, $L$为损耗)：
 
 $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
 
