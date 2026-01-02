@@ -25,16 +25,16 @@
 场区划分：
 - 反应近场区 (Reactive near-field)：紧邻天线，电磁场以储能为主，适用于NFC、RFID等 (Area closest to the antenna, where the electromagnetic fields are highly reactive and non-radiating)
 
-$$R<0.63\sqrt{\frac{D^3}{\lambda}}$$
+$$R < 0.63\sqrt{\frac{D^3}{\lambda}}$$
 
 - 辐射近场区 (Rediating near-field)：又称菲涅尔 (Fresnel) 区，辐射开始形成 (The region 
 between the reactive near-field region and the far-field region; The Radiation starts to form in this region)
 
-$$0.63\sqrt{\frac{D^3}{\lambda}}<R<\frac{2D^2}{\lambda}$$
+$$0.63\sqrt{\frac{D^3}{\lambda}} < R < \frac{2D^2}{\lambda}$$
 
 - 远场区 (Far-field)：又称夫琅禾费 (Fraunhofer) 区，辐射完全形成，用于大多数通信系统 (The area furthest from the antenna where electromagnetic fields are radiated)
 
-$$\frac{2D^2}{\lambda}<R$$
+$$\frac{2D^2}{\lambda} < R$$
 
 方向性 (Directivity, $D$)：远场参数，描述天线收束能量的能力 (A far field parameter which describes the ability of antenna to focus energy to (a particular) direction(s))
 - 各向同性天线 (Isotropic antenna)：理想均匀辐射模型（球形，基本模型）(Antenna which radiates equal amount of energy in all directions)
@@ -73,8 +73,8 @@ $$P_{r}=10^{-\frac{\text{RL}}{10}}$$
 天线类型：鞭状/单极子、偶极子、八木、环、喇叭、反射阵列、微带贴片、反射面（碟形）、MIMO、相控阵等
 
 半波偶极天线 (Half-wave dipole antenna)：
-- 总长度：$L=\dfrac{\lambda}2$
-- 馈电阻抗 (Feed-point impedance)：$\approx73\Omega$（自由空间）
+- 总长度: $L=\dfrac{\lambda}2$
+- 馈电阻抗 (Feed-point impedance): $\approx73\Omega$（自由空间）
 - 实际长度要 $\times0.97$ 补偿末端效应
 
 微带贴片天线 (Microstrip antenna)：
@@ -86,9 +86,9 @@ $$P_{r}=10^{-\frac{\text{RL}}{10}}$$
 - 设计步骤：
 
 1. 已知：
-     - 谐振频率 (Resonant Frequency)：$f_r$
-     - 介质介电常数 (Dielectric Constant of the Substrate)：$\varepsilon_r$
-     - 基板高度 (Height of the Substrate)：$h$
+     - 谐振频率 (Resonant Frequency): $f_r$
+     - 介质介电常数 (Dielectric Constant of the Substrate): $\varepsilon_r$
+     - 基板高度 (Height of the Substrate): $h$
 2. 贴片宽度$W$：
    
 $$W=\frac{c}{2f_r}\sqrt{\frac{2}{\varepsilon_r+1}}$$
@@ -169,8 +169,8 @@ $$P_r(\text{dB})=P_t(\text{dB})+G_r(\text{dB})+G_t(\text{dB})-20\log_{10}\left(\
 MIMO使用多天线同时传输数据流，在不需要额外带宽或更高功率的前提下提高吞吐量
 
 MIMO信道模型：
-- 接受信号向量（数学模型）：$\bm{Y}=\bm{HX}+\bm{W}$ ($\bm{X}\to\bm{Y}$)
-- $\bm{H}$为信道矩阵，$\bm{W}$为噪声矩阵
+- 接受信号向量（数学模型）: $\boldsymbol{Y}=\boldsymbol{HX}+\boldsymbol{W}$ ($\boldsymbol{X}\to\boldsymbol{Y}$)
+- $\boldsymbol{H}$为信道矩阵, $\boldsymbol{W}$为噪声矩阵
 
 空间分集 (Spatial diversity)：
 - 通过多个独立信道发送相同数据，提高可靠性 (Provides diversity gain; Multiple copies of the same data are sent across independently fading channels)
@@ -253,18 +253,18 @@ $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
   
 ||SISO|SIMO|MISO|
 |:---:|:---:|:---:|:---:|
-|数学模型|$y[l] = g\cdot x[l]+n[l]$|$\bm{y} = \bm{g}x+\bm{n}$|$y=\bm{g}^T\bm{x}+n$|
-|输入|$x[l]\sim CN(0,q)$|$x[l]\sim CN(0,q)$|$\bm{x}=\bm{w}\tilde{x}$, $\tilde{x}\sim CN(0,q)$|
+|数学模型|$y[l] = g\cdot x[l]+n[l]$|$\boldsymbol{y} = \boldsymbol{g}x+\boldsymbol{n}$|$y=\boldsymbol{g}^T\boldsymbol{x}+n$|
+|输入|$x[l]\sim CN(0,q)$|$x[l]\sim CN(0,q)$|$\boldsymbol{x}=\boldsymbol{w}\tilde{x}$, $\tilde{x}\sim CN(0,q)$|
 |噪声|$n[l]\sim CN(0,N_0)$|$n_m\sim CN(0,N_0)$|$n\sim CN(0,N_0)$|
 |容量公式|$C=\log_2\left(1+\dfrac{q\lvert g\rvert^2}{N_0}\right)$|$C=\log_2\left(1+\dfrac{q\lVert g\rVert^2}{N_0}\right)$|$C=\log_2\left(1+\dfrac{q\lVert g\rVert^2}{N_0}\right)$|
 
-注：$\bm{g}$为列向量，$\displaystyle\lVert g\rVert^2=\sum_{i=0}^{M}|g_m|^2$
+注：$\boldsymbol{g}$为列向量，$\displaystyle\lVert g\rVert^2=\sum_{i=0}^{M}|g_m|^2$
 
 - 点对点MIMO：
   - $K$个发送，$M$个接收
-  - 数学模型：$\bm{y}=\bm{G}\bm{x}+\bm{n}$，$\bm{G}$为$M\times K$矩阵
-  - 通过SVD（奇异值分解），有$\bm{G}=\bm{U}\bm{\Sigma}\bm{V}^H$，$\bm{\Sigma}$的对角线值为$s_1,s_2,\cdots,s_{\min{(M,K)}}$
-  - 令$\tilde{\bm{y}}=\bm{U}^H\bm{y}$, $\bm{x}=\bm{V}^H\tilde{\bm{x}}$, $\tilde{\bm{n}}=\bm{U}^H\bm{n}$，有：$$\tilde{\bm{y}}=\bm{\Sigma}\tilde{\bm{x}}+\tilde{\bm{n}}$$
+  - 数学模型：$\boldsymbol{y}=\boldsymbol{G}\boldsymbol{x}+\boldsymbol{n}$，$\boldsymbol{G}$为$M\times K$矩阵
+  - 通过SVD（奇异值分解），有$\boldsymbol{G}=\boldsymbol{U}\boldsymbol{\Sigma}\boldsymbol{V}^H$，$\boldsymbol{\Sigma}$的对角线值为$s_1,s_2,\cdots,s_{\min{(M,K)}}$
+  - 令$\tilde{\boldsymbol{y}}=\boldsymbol{U}^H\boldsymbol{y}$, $\boldsymbol{x}=\boldsymbol{V}^H\tilde{\boldsymbol{x}}$, $\tilde{\boldsymbol{n}}=\boldsymbol{U}^H\boldsymbol{n}$，有：$$\tilde{\boldsymbol{y}}=\boldsymbol{\Sigma}\tilde{\boldsymbol{x}}+\tilde{\boldsymbol{n}}$$
   - 容量：当$q_1,q_2,\cdots,q_S$均最大，且$\displaystyle\sum_{k=1}^{S}q_k=q$ $$C=\sum_{k=1}^{S}\log_2\left(1+s_k^2\frac{q_k}{N_0}\right)$$
   - 可通过注水算法分配功率：$q_k=\max{\left(\mu-\dfrac{N_0}{s_k^2},0\right)}$
 - 最优功率分配——注水算法：
@@ -277,5 +277,5 @@ $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
   - 在视距环境中复用增益有限；用户设备天线数量受限；不易扩展。
 - 多用户MIMO
   - 分为上行链路 (Uplink) 和下行链路 (Downlink)
-  - 与点对点MIMO的区别：用户间不协作 (Users do not cooperate)、各自有功率限制 (Each user cares about its own performance and has its own power budget)、信道建模不同 (The channel matrix $\bm{G}$ is modeled differently)
+  - 与点对点MIMO的区别：用户间不协作 (Users do not cooperate)、各自有功率限制 (Each user cares about its own performance and has its own power budget)、信道建模不同 (The channel matrix $\boldsymbol{G}$ is modeled differently)
   - 大规模MIMO优势：天线数远多于用户数，干扰更小、波束赋形增益更大
