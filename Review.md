@@ -19,7 +19,7 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        width: 45   0px;
+        width: 450px;
     }
 </style>
 场区划分：
@@ -139,7 +139,7 @@ $$P_r(\text{dB})=P_t(\text{dB})+G_r(\text{dB})+G_t(\text{dB})-20\log_{10}\left(\
         display: block;
         margin-left: auto;
         margin-right: auto;
-        width: 45   0px;
+        width: 450px;
     }
 </style>
 星载天线类型：
@@ -185,11 +185,11 @@ MIMO信道模型：
 大规模MIMO (Massive MIMO)：基站部署大量天线（数十至数百），提升频谱和能量效率 (A type of wireless communications technology in which base stations are equipped with a very large number of antenna elements, utilizing the same time and frequency resource, to improve spectral and energy efficiency)
 - 应用技术：
   - 波束成形 (Beamforming)：通过调整天线阵列相位，将波束指向特定用户，增强信号并减少干扰 (Involves the directional transmission and reception of signals between a base station and user equipment; It uses multiple antennas to create narrow beams that can be directed toward specific users or devices, rather than broadcasting signals in all directions)
-    - Higher data rates
-    - Better coverage
-    - More efficient use of the available spectrum
-    - Helps a user to receive a strong signal without interference with other users
-    - 方法：By pre-compensating the phases of transmit antennas
+    - 更高的数据传输速率 (Higher data rates)
+    - 更好的覆盖 (Better coverage)
+    - 更有效的利用可用频谱 (More efficient use of the available spectrum)
+    - 帮助用户在不干扰其他用户的情况下接收强信号 (Helps a user to receive a strong signal without interference with other users)
+    - 方法：通过预先补偿发射天线的相位 (By pre-compensating the phases of transmit antennas)
   - 多址技术 (Multiple access technique)：Enables multiple users to simultaneously share a finite piece of radio spectrum.
     - 老版本通信：
       - 码分多址 (Code division multiple access)
@@ -212,13 +212,13 @@ $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
 ## 2. 大规模MIMO系统
 ### 2.1 大规模MIMO
 优势：
-- 容量提升 (Capacity enhancement)：支持更多用户和设备
-- 能量效率 (Energy efficiency)：波束赋形减少能量浪费和干扰
-- 数据速率提升 (Enhanced data rates)：同时服务多用户
-- 链路可靠性 (Link reliability)：多径效应提升信号可靠性
+- 容量提升 (Capacity enhancement)：支持更多用户和设备 (It can accommodate more users and devices in a single cell, which is crucial for dense urban environments)
+- 能量效率 (Energy efficiency)：波束赋形减少能量浪费和干扰 (Due to beamforming, energy can be concentrated where it’s needed, reducing power wastage and interference)
+- 数据速率提升 (Enhanced data rates)：同时服务多用户 (With the ability to serve multiple users simultaneously using same resources, it boosts overall network throughput)
+- 链路可靠性 (Link reliability)：多径效应提升信号可靠性 (Large number of possible paths are created in massive MIMO between transmitter and receiver, improving the reliability)
 
 特性：
-- 通过波束赋形 (Ceamforming) 和波束导向 (Beam steering) 实现5G承诺的高吞吐量与容量
+- 通过波束赋形 (Beamforming) 和波束导向 (Beam steering) 实现5G承诺的高吞吐量与容量
 - 波束更窄，天线远多于用户设备，提升传输精准度
 - 使用毫米波频段（>24 GHz），天线小巧易安装
 
@@ -237,14 +237,13 @@ $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
 - 覆盖层 (Coverage tier)：广域覆盖、支持移动性，频谱效率是关键挑战
   - 覆盖层是重点研究方向
 
-频谱效率 (Spectral Efficiency)：
+频谱效率 (Spectral Efficiency)：每复样本可可靠传输的比特数，单位bit/(s$\cdot$Hz)
 - 带宽 (Bandwidth)：
   - 基带信号 (Baseband)：$B/2$
   - 通带信号 (Passband)：$B$
 - 奈奎斯特-香农采样定理：带宽为B的信号每秒至少需2B个实样本
-- 频谱效率定义：每复样本可可靠传输的比特数，单位bit/(s$\cdot$Hz)
 
-提升频谱效率的途径：
+提升频谱效率的途径（大规模MIMO）：
   - 多用户同时传输 (Many simultaneous users)
   - 强定向信号 (Strong directive signals)
   - 低干扰 (Little interference leakage)
@@ -260,22 +259,223 @@ $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
 
 注：$\boldsymbol{g}$为列向量，$\displaystyle\lVert g\rVert^2=\sum_{i=0}^{M}|g_m|^2$
 
-- 点对点MIMO：
-  - $K$个发送，$M$个接收
-  - 数学模型：$\boldsymbol{y}=\boldsymbol{G}\boldsymbol{x}+\boldsymbol{n}$，$\boldsymbol{G}$为$M\times K$矩阵
-  - 通过SVD（奇异值分解），有$\boldsymbol{G}=\boldsymbol{U}\boldsymbol{\Sigma}\boldsymbol{V}^H$，$\boldsymbol{\Sigma}$的对角线值为$s_1,s_2,\cdots,s_{\min{(M,K)}}$
-  - 令$\tilde{\boldsymbol{y}}=\boldsymbol{U}^H\boldsymbol{y}$, $\boldsymbol{x}=\boldsymbol{V}^H\tilde{\boldsymbol{x}}$, $\tilde{\boldsymbol{n}}=\boldsymbol{U}^H\boldsymbol{n}$，有：$$\tilde{\boldsymbol{y}}=\boldsymbol{\Sigma}\tilde{\boldsymbol{x}}+\tilde{\boldsymbol{n}}$$
-  - 容量：当$q_1,q_2,\cdots,q_S$均最大，且$\displaystyle\sum_{k=1}^{S}q_k=q$ $$C=\sum_{k=1}^{S}\log_2\left(1+s_k^2\frac{q_k}{N_0}\right)$$
-  - 可通过注水算法分配功率：$q_k=\max{\left(\mu-\dfrac{N_0}{s_k^2},0\right)}$
-- 最优功率分配——注水算法：
+点对点MIMO (Point-to-point MIMO)：
+
+- 假设: $K$ 个发送端, $M$ 个接收端
+
+$$\boldsymbol{y}=\boldsymbol{G}\boldsymbol{x}+\boldsymbol{n}$$
+
+($\boldsymbol{G}$ 为 $M\times K$ 矩阵)
+
+- 通过SVD（奇异值分解），有 
+
+$$\boldsymbol{G}=\boldsymbol{U}\boldsymbol{\Sigma}\boldsymbol{V}^H$$
+
+- 对角矩阵 $\boldsymbol{\Sigma}$ 的对角线值为 $s_1,s_2,\cdots,s_{\min{(M,K)}}$，为 $\boldsymbol{GG}^H$ 和 $\boldsymbol{G}^H\boldsymbol{G}$的非零特征值
+
+- 令$\tilde{\boldsymbol{y}}=\boldsymbol{U}^H\boldsymbol{y}$, $\boldsymbol{x}=\boldsymbol{V}^H\tilde{\boldsymbol{x}}$, $\tilde{\boldsymbol{n}}=\boldsymbol{U}^H\boldsymbol{n}$，有：
+
+$$\tilde{\boldsymbol{y}}=\boldsymbol{\Sigma}\tilde{\boldsymbol{x}}+\tilde{\boldsymbol{n}}$$
+
+- 容量 $C$：当$q_1,q_2,\cdots,q_S$均最大，且 $\displaystyle\sum_{k=1}^{S}q_k=q$ ($S$为有用信道的数量，即能传输信号的信道的数量)
+
+$$C=\sum_{k=1}^{S}\log_2\left(1+s_k^2\frac{q_k}{N_0}\right)$$
+
+- 可通过注水算法分配功率：$q_k=\max{\left(\mu-\dfrac{N_0}{s_k^2},0\right)}$
+
+最优功率分配——注水算法 (Waterfilling)：
   - 功率分配给信道条件好的子信道
-  - 低信噪比：只分配给最强子信道。
-  - 高信噪比：近似均等分配。
-  - 复用增益在高信噪比下显著，低信噪比下主要为波束赋形增益
-- MIMO容量对比与问题：
-  - MIMO容量随天线数线性增长（理想条件下）
-  - 在视距环境中复用增益有限；用户设备天线数量受限；不易扩展。
-- 多用户MIMO
-  - 分为上行链路 (Uplink) 和下行链路 (Downlink)
-  - 与点对点MIMO的区别：用户间不协作 (Users do not cooperate)、各自有功率限制 (Each user cares about its own performance and has its own power budget)、信道建模不同 (The channel matrix $\boldsymbol{G}$ is modeled differently)
-  - 大规模MIMO优势：天线数远多于用户数，干扰更小、波束赋形增益更大
+  - 低信噪比：只分配给最强子信道 $q_1=q, \quad q_2=\cdots=q_s=0$
+
+$$ C \approx \log_2(e)\frac{q}{N_0}s_1^2$$
+  - 高信噪比：近似均等分配 $q_1=q_2=\cdots=q_s=q/s$
+
+$$C \approx \log_2(\dfrac{q}{N_0})+\displaystyle\sum_{k=1}^S\log_2\left(\dfrac{s_k^2}{S}\right)$$
+
+  - 复用增益在高信噪比下显著（是矩阵 $\boldsymbol{GG}^H$的秩），低信噪比下主要为波束赋形增益
+
+![Waterfilling](./pic/Waterfilling.png)
+<style>
+    img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 450px;
+    }
+</style>
+
+点对点MIMO存在的问题：
+- 传播方式：
+  - 视距传播 (Line-of-sight)：在发射天线和接收天线之间，存在一条清晰、无遮挡的直接物理路径
+    - 复用增益 $S\approx 1$
+    - 波束赋形增益在高信噪比下可看作视距传播
+  - 非视距传播 (None-line-of-sight)：发射天线和接收天线之间的直接路径被障碍物遮挡。信号只能通过反射、衍射、散射等间接路径到达
+    - 复用增益 $S=\min{(M,K)}$
+    - 波束赋形增益在低信噪比下可看作非视距传播
+- 点对点MIMO适合应用于非视距传播
+- 用户设备太小，无法安装过多天线
+### 2.3 多用户MIMO (Multi-user MIMO)
+将过程分为多对单MIMO的上传 (Uplink) 过程和单对多MIMO的下载 (Downlink) 过程
+  
+正交频分多址 (Orthogonal Multiple Access)
+- 两个用户，一个分到 $\alpha B$ 的带宽，信道增益均为 $\sqrt{\beta}$, 则有
+
+$$R_1=\alpha B\log_2\left(1+\frac{P\beta}{\alpha B N_0}\right)$$
+$$R_2=(1-\alpha) B\log_2\left(1+\frac{P\beta}{(1-\alpha) B N_0}\right)$$
+
+多用户上行信道建模：
+
+$$ \boldsymbol{y}=\sqrt{\rho_{ul}}\boldsymbol{Gx}+\boldsymbol{w} $$
+
+- $\rho_{ul}$ 为功率归一化因子
+- $x_k$ 满足 $E[\lvert x\rvert^2]\leqslant 1$，即 $x$ 的频率归一化
+- $\boldsymbol{w} \sim CN(0,I_M)$, $I_M$ 为 $M$ 阶单位矩阵，即 $\boldsymbol{n}$ 的频率归一化
+
+与点对点MIMO的区别：
+- 用户间无协作：用户独立编码和发送数据 (User do not cooperate)
+- 性能指标不同：每个用户只考虑自己的信道表现 (Each user cares about its own performance)
+- 功率约束不同：每个用户有自己的功率限制 (Each user has its own power budget)
+- 信道建模差异：信道矩阵 $\boldsymbol{G}$ 建立模型不同 (The channel matrix $\boldsymbol{G}$ is modeled differently)
+
+与大规模MIMO的区别 ($M$ 为基站天线数量，$K$ 为用户天线数量)：
+- 多用户MIMO：
+  - $M > K$, 相差数量不大
+  - 常用于LTE和WIFI
+  - 很少达到容量增益 $K$
+- 大规模MIMO
+  - $M \gg K$，相差数量很大
+  - 有更多的强指向性信号 (More directive signals)
+    - 更少的随机性 (Less randomness)
+    - 更大的波束赋形增益 (Larger beamforming gain)
+    - 更少的干扰 (Less interference)
+### 2.4 大规模MIMO
+动机：由于大数定理，当天线数远远大于用户数时，可以用匹配滤波直接进行滤出需要的信号
+
+信道处理：
+- 相干时间 (Coherence time)
+  - 由于用户移动，信道是时变的，但是在一段较短的时间 $T_c$ 内，信道可看作线性时不变的
+
+$$ T_c = \frac{\lambda}{2v} \quad \text{or} \quad T_c = \frac{\lambda}{4v} $$
+
+$v$ 为用户速度
+- 相干带宽 (Coherence bandwidth)
+  - 由于多径传播，信道响应是随频率变化而变化的，但是在一段较窄的带宽 $B_c$ 内，信道响应可以看作平坦的（常数）
+
+$$ B_c = \frac{c}{\lvert d_{\max}-d_{\min}\rvert} \quad \text{or} \quad B_c = \frac{c}{2\lvert d_{\max}-d_{\min}\rvert} $$
+
+- 相干块 (Coherence block)：A coherence block consists of a number of subcarriers and time samples over which the channel response is approximately constant and flat-fading
+  - 将时间和频率资源网格化，每个相干块在时间上跨度 $T_c$ ，在频率上跨度 $B_c$
+  - 每个相干块包含 $\tau_c=B_c\times T_c$ 个复符号（或称采样点）
+  - 在一个相干块内，信道可以被一个**常数复增益**来描述
+
+信道估计：
+- 上行信道估计
+  - 原理：用户发送已知的导频信号 (UE sends a single pilot signal $s \in C$ that is known in BS)
+  - 核心优势：对于拥有M根天线的基站，要估计一个用户的 $M$ 维信道向量 $h$，只需要该用户发送1个导频符号。因为基站有 $M$ 个观测方程（每根天线一个）来解1个未知向量
+  - 公式: $\boldsymbol{y}=\boldsymbol{h}s+\boldsymbol{n}$
+  - 推广: $K$ 个用户，需要正交的 $K$ 个导频符号 ($K$ 维正交导频序列)
+- 下行信道估计
+  - 原理：基站从每根天线依次发送导频，用户分别估计每根天线到自己的信道 (The BS send a known pilot signal $s$ subsequently from each antenna)
+  - 核心劣势：用户要估计基站 $M$ 根天线到自己的信道，需要基站发送 $M$ 个导频符号
+  - 额外开销：用户还需要通过上行链路将估计出的 $M$ 维信道 $\hat{\boldsymbol{h}}$ 反馈给基站，这又需要开销
+- 时分双工与频分双工
+  - 时分双工 (TDD)：利用信道互易性（上下行信道在同一个频点上是对称的）(Reciprocal)，只需在上行做一次信道估计（开销为 $K$），基站即可获知下行信道。
+    - 总开销: $K$ 个符号
+  - 频分双工 (FDD)：上下行频率不同，互易性不成立，必须分别估计上行和下行信道，且下行估计和反馈开销巨大。
+    - 总开销: $M+K/2$ 个符号
+- 当 $M\gg K$时，FDD的开销 $\approx M$，远大于TDD的开销 $K$，故大规模MIMO使用时分双工 (TDD)
+
+应用了TDD的大规模MIMO：
+- 总大小 $\tau_c=T_c \times B_c$
+- 上行训练阶段：占用 $K$ 个符号，所有用户发送正交导频
+- 数据传输阶段：占用 $\tau_c - K$ 个符号，传输数据
+
+完整的上行: $\boldsymbol{y}=\sqrt{\rho_{ul}}\boldsymbol{Gx}+\boldsymbol{w}$
+
+$$ρ_{ul} = \frac{P_{out} \times G_{antenna}}{B \times N_0}$$
+
+- $\beta_k$：用户 $k$ 的大尺度衰落系数。包含了路径损耗和阴影衰落，随用户位置缓慢变化。增益 $g \sim CN(0,\beta_k)$
+
+导频污染 (Pilot Contamination)
+
+相邻小区如果复用相同的 $K$ 个正交导频序列，那么基站在进行信道估计时，无法区分来自本小区和相邻小区的、使用相同导频的用户信号
+- 本质：导频污染是一种无法通过增加天线数 $M$ 来消除的干扰
+- 后果：基站估计出的信道是“污染”的，是目标用户信道和干扰用户信道的叠加
+  - 下行预编码时，会把一部分能量错误地导向干扰用户
+  - 上行检测时，干扰用户的信号无法被平均掉
+
+### 2.5 大规模MIMO的应用（本节内容由于描述过少，故由AI生成）
+- URLLC
+  - 可靠性极高、时延极低
+- mMTC
+  - 连接海量低功耗、低成本的设备
+
+传统MIMO主要为“高速率”设计，而Massive MIMO因其独特的天线阵列特性，天生适合解决这两大新场景的挑战。
+
+信道硬化 (Channel hardening)
+- 问题：在传统无线通信中，由于多径衰落，信道是剧烈波动的。信号强度可能在毫秒级别内变化数十dB。这对于要求超高可靠性的URLLC是灾难性的
+- 现象：考虑一个随机信道向量 $ h \sim \mathcal{CN}(0, I_M) $
+    - 其模的平方 $ \|h\|^2 $ 的均值为 $ M $, 方差也为 $ M $
+    - 但如果我们看其平均值 $ \frac{1}{M}\|h\|^2 $：
+        - 均值：$ 1 $
+        - 方差：$ 1/M $
+    - 结论：随着天线数 $ M $ 增加，归一化信道增益 $ \frac{1}{M}\|h\|^2 $ 的波动（方差）急剧减小，越来越稳定地趋近于其均值1
+
+- 物理图像：
+    - 传统单天线或少天线：信道就像一根剧烈晃动的细绳子，接收信号时强时弱
+    - Massive MIMO（数百天线）：信道就像一个由数百根细绳拧成的粗缆绳。单根绳子仍在晃动，但整体缆绳的晃动幅度被平均掉了，变得非常稳定
+    - 波束变窄：天线越多，形成的波束越窄，能收集到的多径分量越“精选”，进一步减少了随机性
+
+- 双重好处：
+    1. 增益随M增大: $ \|h\|^2 \approx M $ → 提供巨大的阵列增益
+    2. 波动随M减小：方差为 $ 1/M $ → 提供极致的稳定性
+
+- 对URLLC的意义：信道硬化使得链路质量变得高度可预测。系统不再需要为对抗深衰落而预留巨大的功率余量，从而能在极低的时延下（无需冗长的重传和交织）实现超高可靠性
+
+- 信道硬化直接带来了**极佳的链路可靠性**，这是实现URLLC的先决条件
+
+既然Massive MIMO能提供约 $ M $ 倍的阵列增益（即功率增益），我们该如何使用这笔“财富”？PPT提出了两种策略：
+
+- 策略一：范围扩展
+    - 做法：保持用户发射功率不变，利用阵列增益提升接收信噪比
+    - 效果：
+        1. 覆盖更远：原本处于小区边缘、信号微弱的用户，现在可以被可靠服务
+        2. 穿透更强：信号能更好地穿透建筑物，改善室内覆盖
+    - 增益：理论上可获得 $ 10 \log_{10}(M) $ dB 的链路预算改善
+
+- 策略二：低功耗运行
+    - 做法：保持通信距离和信噪比不变，利用阵列增益来降低用户设备的发射功率
+    - 效果：
+        1. 延长电池寿命：对物联网（mMTC）传感器至关重要。可降低 $ 5 \log_{10}(M) $ 到 $ 10 \log_{10}(M) $ dB的功率
+        2. 降低基站功耗：下行链路中，总功率分摊到更多天线上，每根天线的功放可以更小、更高效
+
+mMTC支持：
+- **场景设定**：
+    - **设备**：一个远程传感器。
+    - **挑战**：巨大路径损耗（150 dB，对应数十公里距离或严重穿透损耗）。
+    - **传统计算**（无Massive MIMO增益）：
+        - 发射功率：20 dBm（100 mW）
+        - 天线增益（收发）：2.15 dBi + 2.15 dBi = 4.3 dB
+        - 路径损耗：-150 dB
+        - 噪声功率（100 kHz带宽）：-120 dBm
+        - **最终SNR = 20 + 4.3 - 150 - (-120) = -5.7 dB**
+    - **结论**：信噪比为负，传统系统无法直接解调，必须依赖复杂的重复编码和极低速传输。
+
+- **引入Massive MIMO (M=100)**：
+    - 获得阵列增益：\( 10 \log_{10}(100) = 20 \text{ dB} \)
+    - **现在有两种用法**：
+        1. **用于范围扩展**：SNR从 -5.7 dB 提升至 **14.3 dB**。此时链路非常稳健，可以使用更高阶调制，传输更多数据。
+        2. **用于降低功耗**：将传感器发射功率降低 10-20 dB（即降至 2-0.2 mW），同时保持SNR在可接受水平（如0 dB）。这能**将电池寿命延长10倍以上**。
+
+- **mMTC的设计哲学**：
+    - 传感器每天只发送几个小数据包，每个包的**能量消耗极低**。
+    - Massive MIMO通过低功耗运行模式，使得用小型电池维持数年寿命成为可能，解决了mMTC部署的最大痛点。
+
+### **总结：54-58页的核心逻辑链**
+
+1.  **提出问题（P54）**：5G需要服务URLLC（高可靠）和mMTC（海量低功耗）这两类全新应用。
+2.  **提供理论武器（P55-56）**：**信道硬化**是Massive MIMO的自然特性，它能将不稳定的无线链路变得极其稳定，这**完美解决了URLLC对可靠性的苛刻要求**。
+3.  **阐述实现手段（P57）**：Massive MIMO的阵列增益是一笔“资源”，可以灵活用于**扩展覆盖**或**降低功耗**。
+4.  **应用案例拆解（P58）**：以mMTC为例进行定量分析，展示如何通过阵列增益，在极端路损下，要么实现可靠连接，要么大幅延长设备寿命，从而**解决了mMTC的核心挑战**。
+
+**最终结论**：Massive MIMO不仅仅是一个“提速”的技术。通过**信道硬化**和**巨大的阵列增益**，它从根本上重塑了无线链路的性质，使其同时具备了**高可靠、广覆盖、低功耗**的潜力，从而成为支撑5G及未来网络三大场景（eMBB， URLLC， mMTC）的**统一物理层基础**。这就是其革命性所在。
