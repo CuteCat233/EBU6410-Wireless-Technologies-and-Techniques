@@ -228,7 +228,7 @@ $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
 ### 2.2 频谱效率
 区域吞吐量 (Area Throughput)：
 - 区域吞吐量 $=$ 带宽 $\times$ 小区密度 $\times$ 频谱效率
-- 单位: $\text{bit}/(\text{s}\cdot\text{km}^2)$
+- 单位: $\text{bps}/\text{km}^2$
 - 提升吞吐量：
   - 增加带宽 (Allocate more bandwidth)
   - 增加基站密度 (Densify the network by adding more BSs)
@@ -239,7 +239,7 @@ $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
 - 覆盖层 (Coverage tier)：广域覆盖、支持移动性，频谱效率是关键挑战
   - 覆盖层是重点研究方向
 
-频谱效率 (Spectral Efficiency)：每复样本可可靠传输的比特数，单位 $\text{bit}/(\text{s}\cdot\text{Hz})$
+频谱效率 (Spectral Efficiency)：每复样本可可靠传输的比特数，单位 $\text{bps}/\text{Hz}$
 - 带宽 (Bandwidth)：
   - 基带信号 (Baseband): $B/2$
   - 通带信号 (Passband): $B$
