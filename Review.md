@@ -213,7 +213,7 @@ $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
 ### 2.1 大规模MIMO
 优势：
 - 容量提升 (Capacity enhancement)：支持更多用户和设备 (It can accommodate more users and devices in a single cell, which is crucial for dense urban environments)
-- 能量效率 (Energy efficiency)：波束赋形减少能量浪费和干扰 (Due to beamforming, energy can be concentrated where it’s needed, reducing power wastage and interference)
+- 能量更有效 (Energy efficiency)：波束赋形减少能量浪费和干扰 (Due to beamforming, energy can be concentrated where it’s needed, reducing power wastage and interference)
 - 数据速率提升 (Enhanced data rates)：同时服务多用户 (With the ability to serve multiple users simultaneously using same resources, it boosts overall network throughput)
 - 链路可靠性 (Link reliability)：多径效应提升信号可靠性 (Large number of possible paths are created in massive MIMO between transmitter and receiver, improving the reliability)
 
