@@ -275,15 +275,15 @@ $$\boldsymbol{G}=\boldsymbol{U}\boldsymbol{\Sigma}\boldsymbol{V}^H$$
 
 - 对角矩阵 $\boldsymbol{\Sigma}$ 的对角线值为 $s_1,s_2,\cdots,s_{\min{(M,K)}}$，为 $\boldsymbol{GG}^H$ 和 $\boldsymbol{G}^H\boldsymbol{G}$的非零特征值
 
-- 令$\tilde{\boldsymbol{y}}=\boldsymbol{U}^H\boldsymbol{y}$, $\boldsymbol{x}=\boldsymbol{V}^H\tilde{\boldsymbol{x}}$, $\tilde{\boldsymbol{n}}=\boldsymbol{U}^H\boldsymbol{n}$，有：
+- 令 $\tilde{\boldsymbol{y}}=\boldsymbol{U}^H\boldsymbol{y}$, $\boldsymbol{x}=\boldsymbol{V}^H\tilde{\boldsymbol{x}}$, $\tilde{\boldsymbol{n}}=\boldsymbol{U}^H\boldsymbol{n}$，有：
 
 $$\tilde{\boldsymbol{y}}=\boldsymbol{\Sigma}\tilde{\boldsymbol{x}}+\tilde{\boldsymbol{n}}$$
 
-- 容量 $C$：当$q_1,q_2,\cdots,q_S$均最大，且 $\displaystyle\sum_{k=1}^{S}q_k=q$ ($S$为有用信道的数量，即能传输信号的信道的数量)
+- 容量 $C$：当 $q_1,q_2,\cdots,q_S$ 均最大，且 $\displaystyle\sum_{k=1}^{S}q_k=q$ ($S$为有用信道的数量，即能传输信号的信道的数量)
 
 $$C=\sum_{k=1}^{S}\log_2\left(1+s_k^2\frac{q_k}{N_0}\right)$$
 
-- 可通过注水算法分配功率：$q_k=\max{\left(\mu-\dfrac{N_0}{s_k^2},0\right)}$
+- 可通过注水算法分配功率: $q_k=\max{\left(\mu-\dfrac{N_0}{s_k^2},0\right)}$
 
 最优功率分配——注水算法 (Waterfilling)：
   - 功率分配给信道条件好的子信道
@@ -317,9 +317,9 @@ $$C \approx \log_2(\dfrac{q}{N_0})+\displaystyle\sum_{k=1}^S\log_2\left(\dfrac{s
 - 点对点MIMO适合应用于非视距传播
 - 用户设备太小，无法安装过多天线
 ### 2.3 多用户MIMO (Multi-user MIMO)
-将过程分为多对单MIMO的上传 (Uplink) 过程和单对多MIMO的下载 (Downlink) 过程
+将过程分为单对多MIMO的上传 (Uplink) 过程和多对单MIMO的下载 (Downlink) 过程
   
-正交频分多址 (Orthogonal Multiple Access)
+正交多址 (Orthogonal Multiple Access)
 - 两个用户，一个分到 $\alpha B$ 的带宽，信道增益均为 $\sqrt{\beta}$, 则有
 
 $$R_1=\alpha B\log_2\left(1+\frac{P\beta}{\alpha B N_0}\right)$$
@@ -329,8 +329,8 @@ $$R_2=(1-\alpha) B\log_2\left(1+\frac{P\beta}{(1-\alpha) B N_0}\right)$$
 
 $$ \boldsymbol{y}=\sqrt{\rho_{ul}}\boldsymbol{Gx}+\boldsymbol{w} $$
 
-- $\rho_{ul}$ 为功率归一化因子
-- $x_k$ 满足 $E[\lvert x\rvert^2]\leqslant 1$，即 $x$ 的频率归一化
+- $\rho_{ul}$ 为功率归一化因子，即为SNR
+- $x_k$ 满足 $E[\lvert x\rvert^2]\leq 1$，即 $x$ 的频率归一化
 - $\boldsymbol{w} \sim CN(0,I_M)$, $I_M$ 为 $M$ 阶单位矩阵，即 $\boldsymbol{n}$ 的频率归一化
 
 与点对点MIMO的区别：
@@ -339,9 +339,9 @@ $$ \boldsymbol{y}=\sqrt{\rho_{ul}}\boldsymbol{Gx}+\boldsymbol{w} $$
 - 功率约束不同：每个用户有自己的功率限制 (Each user has its own power budget)
 - 信道建模差异：信道矩阵 $\boldsymbol{G}$ 建立模型不同 (The channel matrix $\boldsymbol{G}$ is modeled differently)
 
-与大规模MIMO的区别 ($M$ 为基站天线数量，$K$ 为用户天线数量)：
+与大规模MIMO的区别 ($M$ 为基站天线数量, $K$ 为用户天线数量)：
 - 多用户MIMO：
-  - $M > K$, 相差数量不大
+  - $M > K$，相差数量不大
   - 常用于LTE和WIFI
   - 很少达到容量增益 $K$
 - 大规模MIMO
@@ -361,7 +361,7 @@ $$ T_c = \frac{\lambda}{2v} \quad \text{or} \quad T_c = \frac{\lambda}{4v} $$
 
 $v$ 为用户速度
 - 相干带宽 (Coherence bandwidth)
-  - 由于多径传播，信道响应是随频率变化而变化的，但是在一段较窄的带宽 $B_c$ 内，信道响应可以看作平坦的（常数）
+  - 由于多径传播，信道响应是随频率变化而变化的（频率选择的），但是在一段较窄的带宽 $B_c$ 内，信道响应可以看作平坦的（常数）
 
 $$ B_c = \frac{c}{\lvert d_{\max}-d_{\min}\rvert} \quad \text{or} \quad B_c = \frac{c}{2\lvert d_{\max}-d_{\min}\rvert} $$
 
@@ -373,7 +373,7 @@ $$ B_c = \frac{c}{\lvert d_{\max}-d_{\min}\rvert} \quad \text{or} \quad B_c = \f
 信道估计：
 - 上行信道估计
   - 原理：用户发送已知的导频信号 (UE sends a single pilot signal $s \in C$ that is known in BS)
-  - 核心优势：对于拥有M根天线的基站，要估计一个用户的 $M$ 维信道向量 $h$，只需要该用户发送1个导频符号。因为基站有 $M$ 个观测方程（每根天线一个）来解1个未知向量
+  - 核心优势：对于拥有 $M$ 根天线的基站，要估计一个用户的 $M$ 维信道向量 $h$，只需要该用户发送1个导频符号。因为基站有 $M$ 个观测方程（每根天线一个）来解1个未知向量
   - 公式: $\boldsymbol{y}=\boldsymbol{h}s+\boldsymbol{n}$
   - 推广: $K$ 个用户，需要正交的 $K$ 个导频符号 ($K$ 维正交导频序列)
 - 下行信道估计
@@ -397,6 +397,7 @@ $$ B_c = \frac{c}{\lvert d_{\max}-d_{\min}\rvert} \quad \text{or} \quad B_c = \f
 $$ρ_{ul} = \frac{P_{out} \times G_{antenna}}{B \times N_0}$$
 
 - $\beta_k$：用户 $k$ 的大尺度衰落系数。包含了路径损耗和阴影衰落，随用户位置缓慢变化。增益 $g \sim CN(0,\beta_k)$
+- SNR为 $\rho_{ul}\beta_k$
 
 导频污染 (Pilot Contamination)
 
@@ -417,11 +418,11 @@ $$ρ_{ul} = \frac{P_{out} \times G_{antenna}}{B \times N_0}$$
 信道硬化 (Channel hardening)
 - 问题：在传统无线通信中，由于多径衰落，信道是剧烈波动的。信号强度可能在毫秒级别内变化数十dB。这对于要求超高可靠性的URLLC是灾难性的
 - 现象：考虑一个随机信道向量 $h \sim CN(0,I_M)$
-    - 其模的平方 $ \lvert h\rvert^2$ 的均值为 $M$, 方差也为 $M$
-    - 但如果我们看其平均值 $\frac{1}{M}\|h\|^2$：
-        - 均值：$1$
-        - 方差：$1/M$
-    - 结论：随着天线数 $M$ 增加，归一化信道增益 $\frac{1}{M}\lvert h\rvert^2$ 的波动（方差）急剧减小，越来越稳定地趋近于其均值1
+    - 其模的平方 $\lvert h\rvert^2$ 的均值为 $M$, 方差也为 $M$
+    - 但如果我们看其平均值 $\dfrac{1}{M}\|h\|^2$：
+        - 均值: $1$
+        - 方差: $1/M$
+    - 结论：随着天线数 $M$ 增加，归一化信道增益 $\dfrac{1}{M}\lvert h\rvert^2$ 的波动（方差）急剧减小，越来越稳定地趋近于其均值1
 
 - 物理图像：
     - 传统单天线或少天线：信道就像一根剧烈晃动的细绳子，接收信号时强时弱
@@ -678,6 +679,16 @@ QPSK
 四向中继 (Four-way Relaying)
 - 同时调度两个双向中继流量
 - 使用叠加编码与干扰消除，仅需两个时隙，频谱效率高
+
+![FWR](./pic/FWR.png)
+<style>
+    img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 450px;
+    }
+</style>
 
 中继协议：
 - 解码转发（解码后重新编码转发） (Decode-and-forward)
