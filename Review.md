@@ -54,7 +54,7 @@ $e_{\text{tot}}$ 为总效率
 $$Z=R+jX$$
 
 $R$：电阻部分，消耗或辐射能量; $X$：电抗部分，储存能量
-- 阻抗匹配 (Impedance matched)：天线阻抗应与传输线阻抗匹配（通常为$50\Omega$），以实现最大功率传输
+- 阻抗匹配 (Impedance matched)：天线阻抗应与传输线阻抗匹配（通常为 $50\Omega$），以实现最大功率传输
 
 反射系数 (Reflection coefficient, $\Gamma$)：反映阻抗失配产生的能量反射 (The ratio of reflected voltage to incident voltage, measuring the reflection or energy loss)
 
@@ -127,8 +127,10 @@ $$P_r(\text{dB})=P_t(\text{dB})+G_r(\text{dB})+G_t(\text{dB})-20\log_{10}\left(\
 
 假设条件：自由空间，无阻挡
 ### 1.4 卫星通信天线
-空间段：卫星本身及星载天线
-地面段：地面站发射/接收天线
+空间段 (Space Segment)：卫星本身及星载天线
+
+地面段 (Ground Segment)：地面站发射/接收天线
+
 地面段天线类型：
 - 抛物面反射天线：高增益、窄波束 (Uses a curved surface with the cross-sectional shape of a parabola, to direct radio waves. It has very high directivity and gain, producing the narrowest beamwidths for point-to-point communications)
 - 馈电方式：卡塞格伦 (Cassegrain)、格雷戈里 (Gregorian)、前馈 (Front feed)、偏馈 (Offset feed)等
