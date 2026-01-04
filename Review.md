@@ -745,6 +745,12 @@ $$B=\frac{N+\beta+\varepsilon}{T_N}$$
 
 循环前缀 (Cyclic Prefix)：长度为 $\mu$, 加在信号前防止符号间干扰（ISI）。这导致总长为 $\mu+N$
 
+总传输时间: $T_{\text{total}}=(\mu+N)T_S$
+
+循环前缀超前量 (Overhead): $\dfrac{\mu}{\mu+N}$
+
+MQAM的数据传输速率: $\dfrac{\log_2(M)\times(\mu+N)}{T_{\text{total}}}$
+
 ODFM调制图：
 ![OFDMM](./pic/OFDMM.png)
 <style>
