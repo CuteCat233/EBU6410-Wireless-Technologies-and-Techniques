@@ -250,7 +250,7 @@ $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
   - 强定向信号 (Strong directive signals)
   - 低干扰 (Little interference leakage)
 
-不同模型的区别：$q$为样本能量，$q=P/B$
+不同模型的区别: $q$为样本能量, $q=P/B$
   
 ||SISO|SIMO|MISO|
 |:---:|:---:|:---:|:---:|
@@ -259,7 +259,7 @@ $$\text{Array Gain}=10\log_{10}(N)+G_e-L_{\text{ohmic}}−L_{\text{scan}}$$
 |噪声|$n[l]\sim CN(0,N_0)$|$n_m\sim CN(0,N_0)$|$n\sim CN(0,N_0)$|
 |容量公式|$C=\log_2\left(1+\dfrac{q\lvert g\rvert^2}{N_0}\right)$|$C=\log_2\left(1+\dfrac{q\lVert g\rVert^2}{N_0}\right)$|$C=\log_2\left(1+\dfrac{q\lVert g\rVert^2}{N_0}\right)$|
 
-注：$\boldsymbol{g}$为列向量，$\displaystyle\lVert g\rVert^2=\sum_{i=0}^{M}|g_m|^2$
+注: $\boldsymbol{g}$为列向量, $\displaystyle\lVert g\rVert^2=\sum_{i=0}^{M}|g_m|^2$
 
 点对点MIMO (Point-to-point MIMO)：
 
