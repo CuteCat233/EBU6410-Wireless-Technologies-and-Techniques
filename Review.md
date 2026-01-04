@@ -462,7 +462,7 @@ mMTC支持：
     - **结论**：信噪比为负，传统系统无法直接解调，必须依赖复杂的重复编码和极低速传输。
 
 - **引入Massive MIMO (M=100)**：
-    - 获得阵列增益：$10 \log_{10}(100) = 20 \text{ dB}$
+    - 获得阵列增益: $10 \log_{10}(100) = 20 \text{ dB}$
     - **现在有两种用法**：
         1. **用于范围扩展**：SNR从 -5.7 dB 提升至 **14.3 dB**。此时链路非常稳健，可以使用更高阶调制，传输更多数据。
         2. **用于降低功耗**：将传感器发射功率降低 10-20 dB（即降至 2-0.2 mW），同时保持SNR在可接受水平（如0 dB）。这能**将电池寿命延长10倍以上**。
@@ -475,13 +475,281 @@ mMTC支持：
 
 ## 3. 信道基础
 ### 3.1 信道基础
-- [ ] to do
+#### 3.1.1 信道特性简介：
+移动通信链路：
+- 上行链路 (Uplink, MS $\to$ BS)
+- 下行链路 (Downlink, BS $\to$ MS)
+
+电磁波传播方式导致衰落：
+- 反射 (Reflection)
+- 折射 (Diffration)
+- 散射 (Scattering)
+
+移动信道的主要问题：
+- 多普勒频移 (Doppler spread)：移动导致频率变化，信号频谱被展宽 (Moving changes frequency)
+- 多径效应 (Multipath)：信号通过多条路径到达接收端，引起符号间干扰和衰落 (Copies of signal arrive at receiver with different attenuation and delays, caused dispersive (ISI) and fading (power level fluctuates rapidly) effects)
+
+#### 3.1.2 信道衰落类型：
+传播路径损耗 (Propagation pathloss)：距离效应 - 信号能量随着传输距离的增加而衰减 (Distance effect - signal power is attenuated, as it travels in distance)
+- 可以轻松用物理定律推导，但最常用的还是经验公式
+
+大尺度衰落（慢衰落） (Slow (large-scale) fading)：Shadow variations that caused by **large terrain features**, such as small hills and tall buildings, between BS and MS
+- 由于尺度大而很好量化（过程“慢”）
+
+小尺度衰落（快衰落） (Fast (small-scale) fading)：**Multipath signals**, having a range of delays, attenuations and frequency (Doppler) shifts, are summed at MS antenna, causing rapidly power level fluctuations
+- 由于影响因素告诉复杂而很难准确建模 (Small-scale fading is difficult to model accurately, as factors influencing fast fading characteristics are highly complex)
+- When multipath signals cancel out each other because of different phase changes, signal level is in a deep fade
+- Deep fades typically occur every half-wavelength (180° phase), and for a carrier freguency of 1GHz, wavelength is 30cm
+
+分析：
+- 传播路径损耗：常用哈塔模型（Hata Model）进行建模，适用于不同环境（城市、郊区、乡村）
+- 大尺度衰落：功率的概率密度呈对数正态分布（用dB表示则呈正态分布）
+  - Large scale fading causes further power variation on the mean power level due to propagation pathloss, i.e. it may boost or attenuate signal power
+- 小尺度衰落分布类型：
+  - 瑞利分布（无直达路径） (Rayleigh, NLOS)
+  - 莱斯分布（有直达路径） (Rice, LOS)
+
+#### 3.1.3 多普勒频移
+
+$$ f_D = \frac{v}{\lambda}\cos\theta = f_m\cos\theta$$
+- $v$：移动速度
+- $\lambda$：波长
+- $\theta$：服从 $[0,2\pi]$ 上的均匀分布
+- $f_m$：最大多普勒频率
+
+多普勒扩展带宽 $B_D$：Defined as the"bandwidth" of Doppler spectrum, a measure of spectral broadening caused by the time varying nature of the channel
+
+相干时间 $T_C\propto \dfrac{1}{B_D}$：Used to characterise the time varying nature of the frequency dispersion of the channel in time domain
+
+快衰落 vs. 慢衰落：基带信号带宽 $B_S$, 符号周期 $T_S$
+- 慢衰落信道 (Slow fading channel): $T_S \ll T_C$ 或 $B_S \gg B_D$，信号带宽远大于多普勒扩展带宽，多普勒效应可忽略不计
+- 快衰落信道 (Fast fading channel): $T_S > T_C$ 或 $B_S < B_D$，信号在一个符号周期 $T_S$ 内快速变化
+
+#### 3.1.4 多径效应
+多径效应 (Multipath)：在无线传播环境中，由于电磁波遇到建筑物、山体、车辆等障碍物产生反射、衍射和散射，导致从发射端发出的信号通过两条或更多条路径传播，并在接收端天线处叠加的现象
+
+附加时延 (Excess delay, $\tau_d$)
+  - 直射路径: $\tau_d=0$
+  - 非直射路径: 每条路径有各自的附加时延 $\tau_i$, 衰减 $\alpha_i$, 相位偏移 $\theta_i$
+
+后果：
+  - 时域上：时间色散与符号间干扰(ISI)
+    - 过程：发射端发送一个窄脉冲。由于多径，接收端会收到一串在时间上展宽的脉冲（每个峰值代表一条主要路径）
+    - 量化指标
+      - 功率时延谱 $P(\tau)$ (Power delay profile)：Channel power spectral density as a function of excess delay, i.e. how channel power is distributed along dimension excess delay $\tau$
+      - 均方根时延扩展 $\sigma_\tau$ (Root mean square delay spread): $P(\tau)$ 的“标准差”，是衡量多径时间展宽程度的核心指标
+    - 致命问题——ISI：当多径展宽 $(\sigma_\tau)$ 与发送符号的周期 $(T_S)$ 可比拟甚至更大时，前一个符号的“尾巴”（多径延迟部分）会干扰到后一个符号的主部，导致解码错误
+  - 频域上：频率选择性衰落
+    - 过程：信号的不同频率成分受到不同的影响
+    - 量化指标
+      - 相干带宽 $B_C$: 一个与 $\sigma_\tau$ 成反比的量，定义了信道频率响应基本保持不变的频率范围 (A measure of the range of freguencies over which the channel is "flat") 
+      - 50%相干带宽定义为 $B_C=\dfrac{1}{5\sigma_\tau}$
+
+#### 3.1.5 窄带与宽带信道
+平坦信道 (Flat channel)：又称窄带信道 (Narrowband channel)，满足 $T_S \gg \sigma_\tau$ 或 $B_S \ll B_C$，所有的频率分量几乎经历相同的传播延迟
+- 可用分集方法解决
+
+频率选择信道 (Frequency selective channel)：又称宽带信道 (Wideband channel)，满足 $T_S < \sigma_\tau$ 或 $B_S > B_C$，不同的频率分量有着不同的增益和延迟。可分辨路径数量 $N$ 满足
+- 可用OFDM解决
+
+$$ N = \left\lfloor\frac{\sigma_\tau}{T_S}\right\rfloor+1 $$
+
+#### 3.1.6 协作通信与中继
+- 通过中继节点节省发射功率
+- 适用于“绿色通信”场景
+- 示例中显示中继可节省约1/3的发射功率
+
+|带宽条件|周期条件|信道类型|
+|-------|--------|-------|
+| $B_S \gg B_D$ | $T_S \ll T_C$ |慢衰落|
+| $B_S < B_D$ | $T_S > T_C$ |快衰落|
+| $B_S \ll B_C$ | $T_S \gg \sigma_\tau$|平坦衰落|
+| $B_S > B_C$ | $T_S < \sigma_\tau$|频率选择衰落|
 ### 3.2 通信基础
-- [ ] to do
+详情见信号与系统+数字信号处理+概率论，这里只提大概内容
+
+时域和频域
+- 时域 $\to$ 频域：傅里叶变换
+
+带宽：信号中显著频率的范围
+- 3dB 带宽或 10dB 带宽
+- 零点到零点带宽
+- 奈奎斯特（最小）带宽
+
+信号分类：
+- 确定信号与随机信号
+- 能量信号（能量有限）与功率信号（能量无限）
+
+$$E = \int_{-\infty}^{\infty} f(t)^2dt$$
+
+- 低通信号（基带信号）和带通信号
+  - 低通带宽为 $B$，则其范围是 $(-B,B)$
+  - 带通带宽为 $B$，则其范围是 $(-f_c-\dfrac{B}{2},-f_c+\dfrac{B}{2})\cup(f_c-\dfrac{B}{2},f_c+\dfrac{B}{2})$
+- 窄带信号和宽带信号
+  - 窄带: $0 < B/f_c < 0.01$
+  - 宽带: $0.01 < B/f_c < 0.25$
+  - 超宽带: $0.25 < B/f_c < 2$
+
+加性噪声：
+- 加性高斯白噪声 (AWGN，全带): $\text{PSD}=N_0/2$
+- 带限高斯白噪声: $\text{PSD}=N_0B$，服从 $N(0,N_0B)$
+
+正态分布：
+- 右尾函数（Q函数）：$Q(x)=1-\Phi(x)$, $\Phi(x)$ 为标准正态分布的概率分布函数 (CDF)
+- $X \sim N(\mu,\sigma^2)$ 化为标准正态：$\dfrac{X-\mu}{\sigma} \sim N(0,1)$
+
+BPSK (2PSK)
+- 载波: $f_1(t)=\sqrt{\dfrac{2}{T_b}}\cos(2\pi f_c t)$
+
+QPSK
+- 载波: $f_1(t)=\sqrt{\dfrac{2}{T_b}}\cos(2\pi f_1 t)$, $f_2(t)=\sqrt{\dfrac{2}{T_b}}\sin(2\pi f_2 t)$
+
+16QAM
+- 16个点，编码按格雷码（相邻只改变一个）
 ## 4. 信道处理
-### 4.1 信道多样性
-- [ ] to do
-### 4.2 合作通信
-- [ ] to do
+### 4.1 信道分集
+选择合并分集 (Selection combining, SC)：从多个接收分支中选择信噪比最高的一个进行输出
+
+阈值合并分集 (Threshold combining, TC)：按顺序扫描各分支，选择第一个信噪比高于预设阈值的分支，直到其低于阈值再切换
+
+最大比合并分集 (Maximal ratio combining, MRC)：将所有分支信号共相后按信噪比加权求和，使输出信噪比最大化: $\alpha_i=a_ie^{-j\theta_i}$
+
+等增益合并 (Equal gain combining, EGC)：将所有分支信号共相后等权相加
+
+广义选择合并 (Generalized selection combining, GSC)：选择信噪比最高的 $L$ 个分支进行合并（介于SC和MRC之间）
+- $L=1$ 为SC, $L=M$ 为MRC
+
+通用排序选择 (General order selection, GOS)：选择第 $i$ 强的分支进行接收（不一定是最强的）
+
+发送天线选择/最大比合并 (Transmit antenna selection/maximal ratio combining, TAS/MRC)：发送端选择一根天线使接收端总信噪比最大，接收端使用MRC合并
+
+| 分集方式        | 性能     | 复杂度   | 适用场景                     |
+|----------------|----------|----------|------------------------------|
+| 选择合并        | 低       | 低       | 低成本、低功耗系统           |
+| 阈值合并        | 中低     | 低       | 实时切换系统                 |
+| 等增益合并      | 中       | 中       | 无需幅度信息的系统           |
+| 最大比合并      | 高       | 高       | 高性能通信系统               |
+| 广义选择合并    | 中高     | 中       | 性能与复杂度折中             |
+| 通用排序选择    | 可变     | 中       | 多用户调度、差异化服务       |
+| TAS/MRC        | 高       | 中高     | 多天线发送与接收联合优化系统 |
+
+### 4.2 协作通信
+协作通信的基本概念：
+- 模型：源 $\to$ 中继 $\to$ 目的地
+- 原因：
+  - 直接路径被遮挡或深度衰落
+  - 扩展覆盖范围、提升容量
+  - 提供分集增益
+
+自回程技术 (Self-Backhauling)
+- Backhaul Link: BS给中继
+- Access Link：中继给UE
+
+5G上的应用：
+- 小小区与无线回程 (Small cells with wireless backhaul)
+- 游牧节点 (Wireless backhauling for nomadic nodes)
+- 设备到设备通信 (Device-to-Device (D2D) communication)
+- 毫米波通信 (Millimeter wave communications)
+
+双向中继 (Two-way Relaying)：
+- TWR-Conventional（4阶段）：设备1 $\to$ 中继 $\to$ 设备2 $\to$ 中继 $\to$ 设备1
+- TWR-2（2阶段）：设备1 & 设备2 $\to$ 中继 $\to$ 设备1 & 设备2 
+  - 中继接收两个设备的信号后广播，各设备利用自身发送信息作为边信息解码
+
+协调直接与中继传输 (Coordinated Direct and Relay)
+- CDR1 & CDR2
+
+![CDR](./pic/CDR.png)
+<style>
+    img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 450px;
+    }
+</style>
+- 具体描述如下：
+  - In CDR1, during the first transmission phase, the BS transmits a DL signal X1 to the RS. During the second phase transmission, two concurrent transmissions are scheduled together: (1) RS transmits X1 to MS1, which causes interference at the BS, and (2) MS2 transmits X4 to the BS. As the BS knows X1, its contribution can be removed from the received interfered signal so that decoding of X4 is performed without the presence of interference.
+  - In CDR2, during the first transmission phase, two concurrent transmissions are scheduled together: (1) MS1 transmits an UL signal X2 to the RS and (2) BS transmits X3 to MS2, which causes interference to the RS. During the secondtransmissionphase, RS transmits a signal containing X2 and X3 to the BS. As the BS knows X3, the interference caused by X2 at the BS can be cancelled.
+- 通过干扰消除，将原本需要三个时隙的传输压缩到两个时隙
+
+四向中继 (Four-way Relaying)
+- 同时调度两个双向中继流量
+- 使用叠加编码与干扰消除，仅需两个时隙，频谱效率高
+
+中继协议：
+- 解码转发（解码后重新编码转发） (Decode-and-forward)
+- 放大转发（直接放大转发，分为固定增益与基于CSI的增益） (Amplify-and-forward)
+
+协议选择合并 (Cooperative Selection Combining)：中继路径与直接路径结合时的中断概率
 ### 4.3 多载及正交频分复用
-- [ ] to do
+选择多载波的原因：
+- 信道的总带宽 $B>B_C$，会有频率选择性
+
+解决方法：分成 $N$ 个子信道
+- $B_N = B/N \ll B_C$ 即 $T_N \gg T_M \approx 1/B_C$
+
+多载波调制图：
+![MCM](./pic/MCM.png)
+<style>
+    img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 450px;
+    }
+</style>
+
+多载波解调图：
+![MCD](./pic/MCD.png)
+<style>
+    img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 450px;
+    }
+</style>
+
+无重叠的多载波传输 (Nonoverlapping)：
+
+$$B=\frac{N(1+\beta+\varepsilon)}{T_N}$$
+
+重叠的多载波传输 (Overlapping)：
+
+$$B=\frac{N+\beta+\varepsilon}{T_N}$$
+
+多载波有重叠解调图 ($T_n$ 就是 $T_N$)：
+![MCDO](./pic/MCDO.png)
+<style>
+    img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 450px;
+    }
+</style>
+
+循环前缀 (Cyclic Prefix)：长度为 $\mu$, 加在信号前防止符号间干扰（ISI）。这导致总长为 $\mu+N$
+
+ODFM调制图：
+![OFDMM](./pic/OFDMM.png)
+<style>
+    img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 450px;
+    }
+</style>
+
+ODFM解调图：
+![OFDMD](./pic/OFDMD.png)
+<style>
+    img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 450px;
+    }
+</style>
